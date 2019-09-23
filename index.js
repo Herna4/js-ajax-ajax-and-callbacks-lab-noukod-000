@@ -27,7 +27,17 @@ function showRepositories(response) {
   return repoList
 }
 
-
+function showCommits(el){
+    $.get(`https://api.github.com/repos/${el.dataset.owner}/${el.dataset.repository}/commits`, data => {
+        const renderCommits = (data) => {
+            let result = data.map((commit)=>`<li><h3>${commit.sha}</h3><p>${commit.commit.message}</p></li>`).join('')
+            return `<ul>${result}</ul>`
+            }
+        $('#details').html(renderCommits(data))
+      }).fail(error => {
+        displayError()
+    })
+}
 
 function displayError() {
     $("#errors").html("I'm sorry, there's been an error. Please try again.");
