@@ -27,7 +27,7 @@ function showRepositories(response) {
   return repoList
 }
 
-function showCommits(el){
+function showCommits(item){
     $.get(`https://api.github.com/repos/${el.dataset.owner}/${el.dataset.repository}/commits`, data => {
         const renderCommits = (data) => {
             let result = data.map((commit)=>`<li><h3>${commit.sha}</h3><p>${commit.commit.message}</p></li>`).join('')
